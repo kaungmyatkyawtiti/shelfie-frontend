@@ -31,7 +31,7 @@ export default function DataTable<TData>({
   columnsLength,
 }: DataTableProps<TData>) {
   return (
-    <div>
+    <>
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader className="bg-muted sticky top-0 z-10">
@@ -122,8 +122,7 @@ export default function DataTable<TData>({
           </div>
           <div className="ml-auto flex items-center gap-2 lg:ml-0">
             <Button
-              variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex"
+              className="hidden h-8 w-8 p-0 lg:flex bg-brand-accent hover:opacity-85 text-white"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
@@ -154,8 +153,7 @@ export default function DataTable<TData>({
             </Button>
 
             <Button
-              variant="outline"
-              className="hidden size-8 lg:flex"
+              className="hidden size-8 lg:flex bg-brand-accent text-white hover:opacity-85"
               size="icon"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
@@ -166,6 +164,6 @@ export default function DataTable<TData>({
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

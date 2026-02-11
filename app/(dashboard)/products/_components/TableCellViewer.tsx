@@ -57,7 +57,7 @@ export default function TableCellViewer({ item }: { item: Product }) {
               <Separator />
             </>
           )}
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4 max-w-115 mx-auto w-full">
             <div className="flex flex-col gap-3">
               <Label htmlFor="header">Header</Label>
               <Input id="header" defaultValue={item.name} />
@@ -116,10 +116,12 @@ export default function TableCellViewer({ item }: { item: Product }) {
           </form>
         </div>
         <DrawerFooter>
-          <Button>Submit</Button>
-          <DrawerClose asChild>
-            <Button variant="outline">Done</Button>
-          </DrawerClose>
+          <div className="flex flex-col w-full max-w-115 mx-auto gap-1.5">
+            <Button className="bg-brand-primary text-white hover:opacity-85 h-11">Submit</Button>
+            <DrawerClose asChild>
+              <Button className="h-11 hover:opacity-85">Close</Button>
+            </DrawerClose>
+          </div>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

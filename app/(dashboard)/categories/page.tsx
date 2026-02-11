@@ -13,14 +13,14 @@ import {
   type VisibilityState,
 } from "@tanstack/react-table"
 import { useMemo, useState } from "react"
-import { productsColumns } from "./_components/columns"
 import DataTable from "@/components/DataTable"
-import { MOCK_PRODUCTS } from "@/constants"
+import { MOCK_CATEGORIES } from "@/constants"
+import { categoriesColumn } from "./_components/columns"
 import TableToolbar from "@/components/TableToolbar"
 
 export default function ProductsPage() {
-  const columns = useMemo(() => productsColumns, [])
-  const [data, setData] = useState(MOCK_PRODUCTS)
+  const columns = useMemo(() => categoriesColumn, [])
+  const [data, setData] = useState(MOCK_CATEGORIES)
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -58,15 +58,15 @@ export default function ProductsPage() {
   return (
     <div className="p-6">
       <div className="space-y-1.5 mb-3">
-        <h2 className="font-semibold text-2xl">Products</h2>
-        <p className="text-foreground/85 text-[15px]">Manage your products.</p>
+        <h2 className="font-semibold text-2xl">Categories</h2>
+        <p className="text-foreground/85 text-[15px]">Manage your cateogries.</p>
       </div>
 
       <TableToolbar table={table} />
 
       <DataTable
         table={table}
-        columnsLength={productsColumns.length}
+        columnsLength={categoriesColumn.length}
       />
     </div>
   )

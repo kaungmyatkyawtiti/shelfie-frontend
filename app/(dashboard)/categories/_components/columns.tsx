@@ -1,6 +1,5 @@
 "use client";
 
-import { Input } from "@/components/ui/input"
 import { ColumnDef } from "@tanstack/react-table"
 import {
   DropdownMenu,
@@ -10,13 +9,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, ChevronsUpDown, MoreHorizontal } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Product } from "@/types"
-import { Badge } from "@/components/ui/badge"
-import TableCellViewer from "./TableCellViewer"
+import { Category } from "@/types"
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 
-export const productsColumns: ColumnDef<Product>[] = [
+export const categoriesColumn: ColumnDef<Category>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -46,32 +45,27 @@ export const productsColumns: ColumnDef<Product>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    cell: ({ row }) => {
-      return <TableCellViewer item={row.original} />
-    },
+    cell: ({ row }) => (
+      <div>{row.original.name}</div>
+    ),
     enableHiding: false,
   },
   {
-    accessorKey: "category",
-    header: "Product Category",
+    accessorKey: "description",
+    header: ({ column }) => <h2>Description</h2>,
     cell: ({ row }) => (
-      <Badge
-        variant="outline"
-        className="bg-brand-secondary px-1.5 text-black border border-brand-accent/55 capitalize"
-      >
-        {row.original.category}
-      </Badge>
+      <div>{row.original.description}</div>
     ),
   },
   {
-    accessorKey: "stock",
+    accessorKey: "productCount",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Stocks
+          Products
           <ArrowUpDown size={16} />
         </Button>
       )
@@ -81,59 +75,40 @@ export const productsColumns: ColumnDef<Product>[] = [
         onSubmit={(e) => {
           e.preventDefault()
           toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Saving ${row.original.price}`,
+            loading: `Saving ${row.original.productCount}`,
             success: "Done",
             error: "Error",
           })
         }}
       >
         <Input
-          className="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-18 border-transparent bg-transparent shadow-none focus-visible:border dark:bg-transparent text-end"
-          defaultValue={row.original.stock}
+          className="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-14 border-transparent bg-transparent shadow-none focus-visible:border dark:bg-transparent text-end"
+          defaultValue={row.original.productCount}
           id={`${row.original.id}-target`}
         />
       </form>
     ),
   },
   {
-    accessorKey: "price",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Prices
-          <ArrowUpDown size={16} />
-        </Button>
-      )
-    },
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("price"))
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-              loading: `Saving ${row.original.stock}`,
-              success: "Done",
-              error: "Error",
-            })
-          }}
-        >
-          <Input
-            className="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-22 border-transparent bg-transparent shadow-none focus-visible:border dark:bg-transparent text-end"
-            defaultValue={formatted}
-            id={`${row.original.id}-limit`}
-          />
-        </form>
-      )
-    },
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => (
+      <Badge
+        variant="outline"
+        className="bg-brand-secondary px-1.5 text-black border border-brand-accent/55 capitalize"
+      >
+        {row.original.status}
+      </Badge>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: "Created At",
+    cell: ({ row }) => (
+      <div>
+        {row.original.createdAt}
+      </div>
+    ),
   },
   {
     id: "actions",

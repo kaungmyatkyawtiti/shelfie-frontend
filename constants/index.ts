@@ -1,4 +1,4 @@
-import { Product } from "@/types";
+import { Category, Product } from "@/types";
 import {
   LayoutDashboard,
   ShoppingCart,
@@ -6,6 +6,7 @@ import {
   FileText,
   Users,
   Settings,
+  Layers,
 } from "lucide-react";
 
 export const NAV_LINKS = [
@@ -15,19 +16,24 @@ export const NAV_LINKS = [
     icon: LayoutDashboard,
   },
   {
-    title: "ShopCart",
-    url: "/shop-cart",
-    icon: ShoppingCart,
-  },
-  {
     title: "Products",
     url: "/products",
     icon: Package,
   },
   {
+    title: "Categories",
+    url: "/categories",
+    icon: Layers,
+  },
+  {
     title: "Reports",
     url: "/reports",
     icon: FileText,
+  },
+  {
+    title: "POS",
+    url: "/pos",
+    icon: ShoppingCart,
   },
   {
     title: "Users",
@@ -112,5 +118,78 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 0.86,
     stock: 40,
   },
+  {
+    id: 11,
+    name: "Apples",
+    category: "Grocery",
+    price: 0.87,
+    stock: 20,
+  },
 ];
 
+export const MOCK_CATEGORIES: Category[] = [
+  {
+    id: 1,
+    name: "Grocery",
+    description: "Essential daily food items",
+    productCount: 7,
+    status: "active",
+    createdAt: "2026-02-01",
+  },
+  {
+    id: 2,
+    name: "Beverage",
+    description: "Drinks and refreshments",
+    productCount: 2,
+    status: "active",
+    createdAt: "2026-02-03",
+  },
+  {
+    id: 3,
+    name: "Household",
+    description: "Cleaning and home supplies",
+    productCount: 2,
+    status: "inactive",
+    createdAt: "2026-02-05",
+  },
+  {
+    id: 4,
+    name: "Snacks",
+    description: "Chips, noodles, and quick bites",
+    productCount: 5,
+    status: "active",
+    createdAt: "2026-02-06",
+  },
+  {
+    id: 5,
+    name: "Personal Care",
+    description: "Toiletries and hygiene products",
+    productCount: 4,
+    status: "active",
+    createdAt: "2026-02-07",
+  },
+  {
+    id: 6,
+    name: "Fruits & Vegetables",
+    description: "Fresh produce and organic items",
+    productCount: 6,
+    status: "active",
+    createdAt: "2026-02-08",
+  },
+  {
+    id: 7,
+    name: "Frozen Foods",
+    description: "Frozen meat, snacks, and ice cream",
+    productCount: 0,
+    status: "archived",
+    createdAt: "2026-02-09",
+  },
+  {
+    id: 8,
+    name: "Bakery",
+    description: "Bread, cakes, and baked goods",
+    productCount: 3,
+    status: "inactive",
+    createdAt: "2026-02-10",
+  },
+]

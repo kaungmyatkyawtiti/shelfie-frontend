@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     <SidebarProvider
       style={
         {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--sidebar-width": "calc(var(--spacing) * 64)",
           "--header-height": "calc(var(--spacing) * 13)",
         } as React.CSSProperties
       }
