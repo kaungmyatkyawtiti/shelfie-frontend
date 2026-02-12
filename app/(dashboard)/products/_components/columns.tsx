@@ -12,9 +12,9 @@ import {
 import { Button } from "@/components/ui/button"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Product } from "@/types"
 import { Badge } from "@/components/ui/badge"
 import TableCellViewer from "./TableCellViewer"
+import { Product } from "@/lib/validators/product.schema";
 
 export const productsColumns: ColumnDef<Product>[] = [
   {

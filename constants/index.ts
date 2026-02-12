@@ -1,4 +1,5 @@
-import { Category, Product } from "@/types";
+import { Category } from "@/lib/validators/category.schema";
+import { Product } from "@/lib/validators/product.schema";
 import {
   LayoutDashboard,
   ShoppingCart,

@@ -9,11 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { ArrowUpDown, ChevronsUpDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Category } from "@/types"
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Category } from "@/lib/validators/category.schema";
 
 export const categoriesColumn: ColumnDef<Category>[] = [
   {
@@ -52,7 +52,7 @@ export const categoriesColumn: ColumnDef<Category>[] = [
   },
   {
     accessorKey: "description",
-    header: ({ column }) => <h2>Description</h2>,
+    header: "Description",
     cell: ({ row }) => (
       <div>{row.original.description}</div>
     ),

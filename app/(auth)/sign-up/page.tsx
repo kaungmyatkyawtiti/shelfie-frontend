@@ -1,5 +1,6 @@
 "use client";
 
+import SocialProviders from "@/components/SocialProviders"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -17,36 +18,37 @@ import {
   FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import Link from "next/link"
+import { signUpSchema } from "@/lib/validators/auth.validator"
 import { useForm } from "@tanstack/react-form"
-import SocialProviders from "@/components/SocialProviders"
-import { signInSchema } from "@/lib/validators/auth.validator";
+import Link from "next/link"
 
-export default function SignInPage() {
+export default function SignupForm() {
   const form = useForm({
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
     validators: {
-      onSubmit: signInSchema,
+      onSubmit: signUpSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log("signin submit value", value)
+      console.log("Sign up submit value", value)
     },
   })
 
   return (
     <Card>
       <CardHeader className="text-center mb-2">
-        <CardTitle className="text-lg font-semibold">Welcome Back Again 👋</CardTitle>
+        <CardTitle className="text-lg font-semibold">Create An Account</CardTitle>
         <CardDescription>
-          Enter your information below to sign in
+          Enter your information below to create your account
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form
-          id="sign-in-form"
+          id="sign-up-form"
           onSubmit={(e) => {
             e.preventDefault()
             form.handleSubmit()
@@ -59,6 +61,31 @@ export default function SignInPage() {
             <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
               Or continue with
             </FieldSeparator>
+
+            <form.Field name="name">
+              {(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid
+
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      placeholder="John Doe"
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      aria-invalid={isInvalid}
+                      autoComplete="off"
+                    />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>
+                )
+              }}
+            </form.Field>
 
             <form.Field name="email">
               {(field) => {
@@ -84,7 +111,6 @@ export default function SignInPage() {
                 )
               }}
             </form.Field>
-
             <form.Field name="password">
               {(field) => {
                 const isInvalid =
@@ -96,7 +122,32 @@ export default function SignInPage() {
                     <Input
                       id={field.name}
                       name={field.name}
-                      placeholder="enter your password"
+                      placeholder="enter password"
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      aria-invalid={isInvalid}
+                      autoComplete="off"
+                    />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>
+                )
+              }}
+            </form.Field>
+
+            <form.Field name="confirmPassword">
+              {(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid
+
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      placeholder="enter confirm password"
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
@@ -114,17 +165,17 @@ export default function SignInPage() {
               <Button
                 type="submit"
                 className="bg-brand hover:opacity-85 text-white h-10 text-[15px]"
-                form="sign-in-form"
+                form="sign-up-form"
               >
-                Sign In
+                Create Account
               </Button>
-              <FieldDescription className="text-center">
-                Don&apos;t have an account? <Link href="/sign-up">Sign up</Link>
+              <FieldDescription className="px-6 text-center">
+                Already have an account? <Link href="/sign-in">Sign in</Link>
               </FieldDescription>
             </Field>
           </FieldGroup>
         </form>
-      </CardContent >
-    </Card >
+      </CardContent>
+    </Card>
   )
 }
