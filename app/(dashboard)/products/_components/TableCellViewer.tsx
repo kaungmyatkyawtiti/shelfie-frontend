@@ -23,6 +23,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { useIsMobile } from "@/hooks/useMobile"
 import { Product } from "@/types"
+import { X } from "lucide-react"
 
 export default function TableCellViewer({ item }: { item: Product }) {
   const isMobile = useIsMobile()
@@ -36,7 +37,15 @@ export default function TableCellViewer({ item }: { item: Product }) {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="gap-1">
-          <DrawerTitle>{item.name}</DrawerTitle>
+          <div className="flex items-center justify-between">
+            <DrawerTitle className="text-xl font-bold">Order Details</DrawerTitle>
+            <DrawerClose asChild>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <X className="w-5 h-5" />
+              </Button>
+            </DrawerClose>
+          </div>
+
           <DrawerDescription>
             Showing total visitors for the last 6 months
           </DrawerDescription>
@@ -116,12 +125,9 @@ export default function TableCellViewer({ item }: { item: Product }) {
           </form>
         </div>
         <DrawerFooter>
-          <div className="flex flex-col w-full max-w-115 mx-auto gap-1.5">
-            <Button className="bg-brand-primary text-white hover:opacity-85 h-11">Submit</Button>
-            <DrawerClose asChild>
-              <Button className="h-11 hover:opacity-85">Close</Button>
-            </DrawerClose>
-          </div>
+          <Button className="py-5 rounded-2xl bg-brand-primary hover:opacity-85 text-white font-semibold text-lg shadow-lg max-w-115 mx-auto w-full">
+            Submit
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

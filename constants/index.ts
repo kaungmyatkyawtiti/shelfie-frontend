@@ -16,6 +16,11 @@ export const NAV_LINKS = [
     icon: LayoutDashboard,
   },
   {
+    title: "Sales(POS)",
+    url: "/pos",
+    icon: ShoppingCart,
+  },
+  {
     title: "Products",
     url: "/products",
     icon: Package,
@@ -29,11 +34,6 @@ export const NAV_LINKS = [
     title: "Reports",
     url: "/reports",
     icon: FileText,
-  },
-  {
-    title: "POS",
-    url: "/pos",
-    icon: ShoppingCart,
   },
   {
     title: "Users",
